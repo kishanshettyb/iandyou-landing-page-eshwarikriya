@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -9,17 +9,18 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+type ButtonVariant = 'link' | 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost';
 
 type ModalProps = {
   triggerLabel: string;
   title: string;
-  description: string;
+  description?: string;
   children: ReactNode;
-  onSubmit: () => void;
+  onSubmit?: () => void;
   submitLabel?: string;
   triggerAsChild?: boolean;
   modalFooter?: boolean;
-  triggerVariant?: string;
+  triggerVariant?: ButtonVariant;
   dialogContentClassName?: string;
 };
 
