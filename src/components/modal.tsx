@@ -30,7 +30,7 @@ function Modal({
   children,
   onSubmit,
   submitLabel,
-  triggerAsChild,
+  triggerAsChild = true,
   modalFooter,
   triggerVariant,
   dialogContentClassName
