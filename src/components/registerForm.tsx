@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -18,6 +19,7 @@ import { useState } from 'react';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import { PhoneInput } from '@/components/ui/phone-input';
 import { isValidPhoneNumber } from 'react-phone-number-input';
+import Image from 'next/image';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -59,7 +61,7 @@ export function RegisterForm() {
       <TabsContent value="details">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="space-y-2">
+            <div className="space-y-3">
               <FormField
                 control={form.control}
                 name="name"
@@ -73,21 +75,28 @@ export function RegisterForm() {
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="phone"
                 render={({ field }) => (
                   <FormItem className="flex flex-col items-start">
-                    <FormLabel className="text-left">Phone Number</FormLabel>
+                    <FormLabel className="text-left">Mobile Number (Whatsapp)</FormLabel>
                     <FormControl className="w-full">
                       <PhoneInput placeholder="Enter a phone number" {...field} />
                     </FormControl>
+                    <FormDescription>
+                      You will get update on your Whatsapp{' '}
+                      <Image
+                        className="w-[20px] h-[20px] inline-block"
+                        width={20}
+                        height={20}
+                        src="/whatsapp.svg"
+                      />
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="email"
@@ -97,6 +106,7 @@ export function RegisterForm() {
                     <FormControl>
                       <Input placeholder="Email" {...field} />
                     </FormControl>
+
                     <FormMessage />
                   </FormItem>
                 )}
