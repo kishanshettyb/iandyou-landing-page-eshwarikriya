@@ -82,7 +82,11 @@ export function RegisterForm() {
                   <FormItem className="flex flex-col items-start">
                     <FormLabel className="text-left">Mobile Number (Whatsapp)</FormLabel>
                     <FormControl className="w-full">
-                      <PhoneInput placeholder="Enter a phone number" {...field} />
+                      <PhoneInput
+                        defaultCountry="IN"
+                        placeholder="Enter a phone number"
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription>
                       You will get update on your Whatsapp{' '}
