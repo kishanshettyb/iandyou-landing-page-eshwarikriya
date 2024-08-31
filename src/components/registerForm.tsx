@@ -16,15 +16,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
+import { PhoneInput } from '@/components/ui/phone-input';
+import { isValidPhoneNumber } from 'react-phone-number-input';
 
 const formSchema = z.object({
   name: z.string().min(2, {
     message: 'Name must be at least 2 characters.'
   }),
   email: z.string().email({ message: 'Invalid email address' }),
-  phone: z.string().refine((val) => /^\d+$/.test(val), {
-    message: 'Phone number should contain only digits'
-  })
+  phone: z.string().refine(isValidPhoneNumber, { message: 'Invalid phone number' })
 });
 
 export function RegisterForm() {
@@ -35,8 +35,7 @@ export function RegisterForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
-      email: '',
-      phone: ''
+      email: ''
     }
   });
 
@@ -68,25 +67,27 @@ export function RegisterForm() {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <Input placeholder="Name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="phone"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone No</FormLabel>
-                    <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                  <FormItem className="flex flex-col items-start">
+                    <FormLabel className="text-left">Phone Number</FormLabel>
+                    <FormControl className="w-full">
+                      <PhoneInput placeholder="Enter a phone number" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="email"
@@ -94,7 +95,7 @@ export function RegisterForm() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <Input placeholder="Email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -109,7 +110,25 @@ export function RegisterForm() {
           </form>
         </Form>
       </TabsContent>
-      <TabsContent value="payment">Change your password here.</TabsContent>
+      <TabsContent value="payment">
+        <div className="bg-slate-50 rounded-lg p-4">
+          <p className="text-md font-semi-bold mb-4">Eashwari Kriya Workshop</p>
+
+          <div className="border  rounded-lg">
+            <div className="p-3 flex justify-between   ">
+              <div>
+                <p className="text-sm">Total Payable:</p>
+              </div>
+              <div>
+                <p className="text-sm">3,000/-</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <Button className="w-full mt-5">Make Payment</Button>
+          </div>
+        </div>
+      </TabsContent>
     </Tabs>
   );
 }
