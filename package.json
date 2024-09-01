@@ -45,6 +45,7 @@
     "lucide-react": "^0.436.0",
     "next": "14.2.7",
     "prettier": "^3.3.3",
+    "razorpay": "^2.9.4",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
@@ -54,7 +55,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@builder.io/partytown": "^0.10.2",
+    "@types/node": "^20.16.2",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",

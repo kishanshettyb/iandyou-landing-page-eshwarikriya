@@ -9,9 +9,14 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+
 type ButtonVariant = 'link' | 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost';
 
 type ModalProps = {
+  isModalOpen: boolean;
+  /* eslint-disable no-unused-vars */
+  setIsModalOpen: (isModalOpen: boolean) => void;
+  /* eslint-disable no-unused-vars */
   triggerLabel: string;
   title: string;
   description?: string;
@@ -23,8 +28,9 @@ type ModalProps = {
   triggerVariant?: ButtonVariant;
   dialogContentClassName?: string;
 };
-
 function Modal({
+  isModalOpen,
+  setIsModalOpen,
   triggerLabel,
   title,
   description,
@@ -38,7 +44,7 @@ function Modal({
 }: ModalProps) {
   return (
     <div>
-      <Dialog>
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogTrigger asChild={triggerAsChild}>
           <Button variant={triggerVariant}>{triggerLabel}</Button>
         </DialogTrigger>
