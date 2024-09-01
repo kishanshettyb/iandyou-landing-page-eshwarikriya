@@ -4,18 +4,18 @@ import Script from 'next/script';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ReloadIcon } from '@radix-ui/react-icons';
-
 interface PaymentButtonProps {
   name: string;
   email: string;
   phone: string;
+  closeModal: () => void;
 }
 
-const PaymentButton: React.FC<PaymentButtonProps> = ({ name, email, phone }) => {
+const PaymentButton: React.FC<PaymentButtonProps> = ({ name, email, phone, closeModal }) => {
   const [loading, setLoading] = useState(false);
-
   const handlePayment = async () => {
     setLoading(true);
+    closeModal();
 
     // Create an order on your server
     const response = await fetch('/api/razorpay-order', {
