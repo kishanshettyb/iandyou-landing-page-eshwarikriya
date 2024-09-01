@@ -20,6 +20,7 @@ import { ArrowRightIcon } from '@radix-ui/react-icons';
 import { PhoneInput } from '@/components/ui/phone-input';
 import { isValidPhoneNumber } from 'react-phone-number-input';
 import Image from 'next/image';
+import PaymentButton from './payment-button';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -31,6 +32,12 @@ const formSchema = z.object({
 
 export function RegisterForm() {
   const [activeTab, setActiveTab] = useState('details');
+  // State to store form values
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: ''
+  });
   const [isPaymentTabDisabled, setIsPaymentTabDisabled] = useState(true);
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -45,7 +52,8 @@ export function RegisterForm() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    console.log('values' + values);
+    setFormData(values);
     setIsPaymentTabDisabled(false);
     setActiveTab('payment');
   }
@@ -95,6 +103,7 @@ export function RegisterForm() {
                         width={20}
                         height={20}
                         src="/whatsapp.svg"
+                        alt="whatsapp"
                       />
                     </FormDescription>
                     <FormMessage />
@@ -127,7 +136,6 @@ export function RegisterForm() {
       <TabsContent value="payment">
         <div className="bg-slate-50 rounded-lg p-4">
           <p className="text-md font-semi-bold mb-4">Eashwari Kriya Workshop</p>
-
           <div className="border  rounded-lg">
             <div className="p-3 flex justify-between   ">
               <div>
@@ -139,7 +147,7 @@ export function RegisterForm() {
             </div>
           </div>
           <div>
-            <Button className="w-full mt-5">Make Payment</Button>
+            <PaymentButton name={formData.name} email={formData.email} phone={formData.phone} />
           </div>
         </div>
       </TabsContent>
