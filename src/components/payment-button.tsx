@@ -15,7 +15,6 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ name, email, phone, close
   const [loading, setLoading] = useState(false);
   const handlePayment = async () => {
     setLoading(true);
-    closeModal();
 
     // Create an order on your server
     const response = await fetch('/api/razorpay-order', {
@@ -73,6 +72,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ name, email, phone, close
     });
 
     rzp.open();
+    closeModal();
   };
 
   return (
