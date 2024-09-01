@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ReloadIcon } from '@radix-ui/react-icons';
+import { useRouter } from 'next/navigation';
 interface PaymentButtonProps {
   name: string;
   email: string;
@@ -12,6 +13,7 @@ interface PaymentButtonProps {
 }
 
 const PaymentButton: React.FC<PaymentButtonProps> = ({ name, email, phone, closeModal }) => {
+  const router = useRouter(); // Initialize the router
   const [loading, setLoading] = useState(false);
   const handlePayment = async () => {
     setLoading(true);
@@ -45,6 +47,9 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ name, email, phone, close
         console.log(`Order ID: ${response.razorpay_order_id}`);
         console.log(`Signature: ${response.razorpay_signature}`);
         setLoading(false);
+        router.push(
+          `/thankyou?paymentid=${response.razorpay_payment_id}&orderId=${response.razorpay_order_id}&signature=${response.razorpay_signature}`
+        );
       },
       prefill: {
         name: name,
