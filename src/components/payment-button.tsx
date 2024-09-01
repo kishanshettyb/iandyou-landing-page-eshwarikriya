@@ -59,7 +59,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ name, email, phone, close
       }
     };
 
-    const rzp = new window.Razorpay(options);
+    const rzp = new (window as any).Razorpay(options);
     rzp.on('payment.failed', function (response: any) {
       console.log(`Code: ${response.error.code}`);
       console.log(`Description: ${response.error.description}`);
