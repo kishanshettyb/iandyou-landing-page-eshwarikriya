@@ -42,11 +42,23 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ name, email, phone, close
       name: 'Eshwari Kriya',
       description: 'Eshwari Kriya',
       order_id: order.id,
-      handler: function (response: any) {
+      handler: async function (response: any) {
         console.log(`Payment ID: ${response.razorpay_payment_id}`);
         console.log(`Order ID: ${response.razorpay_order_id}`);
         console.log(`Signature: ${response.razorpay_signature}`);
         setLoading(false);
+        // Send confirmation email
+        try {
+          await fetch('/api/send-email', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: 3000, email: 'INR' }) // Replace with your amount and currency
+          });
+        } catch (error) {
+          console.error('Failed to send email:', error);
+        }
         router.push(
           `/thankyou?paymentid=${response.razorpay_payment_id}&orderId=${response.razorpay_order_id}&signature=${response.razorpay_signature}`
         );
